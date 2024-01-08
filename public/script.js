@@ -1,3 +1,5 @@
+const fromDOM = document.querySelector(".thread-section");
+
 // 最初はthreadの全てを取得
 const getAllThreads = async () => {
   try {
@@ -5,6 +7,18 @@ const getAllThreads = async () => {
     console.log(allThreads);
     let { data } = allThreads;
     console.log(data);
+
+    allThreads = data.map((thread) => {
+      const { title, content } = thread;
+      console.log(title, content);
+      return `
+      <div class="single-thread">
+          <h3>${title}</h3>
+          <p>${content}</p>
+        </div>
+      `;
+    });
+    fromDOM.innerHTML = allThreads;
   } catch (error) {
     console.log(error);
   }
